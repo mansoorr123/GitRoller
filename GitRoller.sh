@@ -6,8 +6,7 @@ echo ========================================
 echo
 
 #Defining paths:
-
-PATH_TRUFFLEHOG="/opt/github/truffleHog/truffleHog/truffleHog.py"
+#PATH_TRUFFLEHOG="/opt/github/truffleHog/truffleHog/truffleHog.py"
 
 #Displaying help :
 if [ $# -eq 0 ] || [ $1 == "-h" ] || [ $1 == "--help" ]
@@ -23,7 +22,7 @@ if [ -d "$GHUSER"_git ]; then
 	echo Please remove directory "$GHUSER"_git and then proceed further.
   	exit
   else	
- 	mkdir "$GHUSER"_git
+# 	mkdir "$GHUSER"_git
   	cd "$GHUSER"_git
 fi
 
@@ -52,10 +51,11 @@ then
 	rm temp_output.txt
 fi
 if [ -s "$GHUSER"_repos.txt ];then
-		echo "(+) Public Repos for $GHUSER are successfully saved into file: "$GHUSER"_repos.txt"
-	else
-		echo "(-) Public Repos for $GHUSER not found"
-		exit
+	repo_no=$(eval "cat "$GHUSER"_repos.txt | wc -l")
+	echo "(+) $repo_no Public Repos found for $GHUSER and  are successfully saved into file: "$GHUSER"_repos.txt"
+else
+	echo "(-) Public Repos for $GHUSER not found"
+	exit
 fi
 echo
 echo "==> Scanning Repos with TuffleHog ..."
@@ -65,7 +65,8 @@ do
 	echo ------------------------------------------------------------------------------------
 	echo Repository: $repo
 	echo ------------------------------------------------------------------------------------
-	$PATH_TRUFFLEHOG --regex --entropy=False $repo | tee  temp_output2.txt
+	trufflehog --regex --entropy=False $repo | tee  temp_output2.txt
+	#$PATH_TRUFFLEHOG --regex --entropy=False $repo | tee  temp_output2.txt
 	if [ -s temp_output2.txt ];then
 		echo ------------------------------------------------------------------------------------ >> "$GHUSER"_trufflehog.txt
 		echo Repository: $repo >> "$GHUSER"_trufflehog.txt
@@ -83,4 +84,5 @@ fi
 	
 #Bell
 echo -e "\a"
+notify-send "GitRoller: Scanning Completed for $GHUSER " >&/dev/null	#Redirecting to null if in devices not having notify-send then that error will not be displayed.
 echo THANKS FOR USING GitRoller !!
