@@ -22,7 +22,7 @@ if [ -d "$GHUSER"_git ]; then
 	echo Please remove directory "$GHUSER"_git and then proceed further.
   	exit
   else	
-# 	mkdir "$GHUSER"_git
+ 	mkdir "$GHUSER"_git
   	cd "$GHUSER"_git
 fi
 
