@@ -3,13 +3,15 @@
 Customized bash tool for scanning organization/user's public github repositories for credentials & secrets via **trufflehog**.
 
 ## Installation:
-chmod +x setup.sh GitRoller.sh  
-./setup.sh  
-cp GitRoller.sh /usr/bin/GitRoller  (optional)
+`chmod +x setup.sh GitRoller.sh`  
+`./setup.sh`
+
+`cp GitRoller.sh /usr/bin/GitRoller`  (optional)
 
 ## Usage:
-GitRoller <organization/user's name>  
-GitRoller twitter
+`GitRoller <organization/user's name> `
+
+`GitRoller twitter`
 
 ## Snaps:
 
