@@ -12,7 +12,7 @@ echo
 if [ $# -eq 0 ] || [ $1 == "-h" ] || [ $1 == "--help" ]
 then
 	echo Usage : supply organisation/user name
-	echo Ex "  " : ./GitRoller hackerone
+	echo Ex "  " : ./GitRoller twitter
 	exit
 fi
 
